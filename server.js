@@ -15,6 +15,8 @@ var database = firebaseAdmin.database()
 
 // app에서 express프레임워크 사용
 var app = express()
+//var port = (process.env.PORT || '3000');
+const PORT = process.env.PORT
 
 //html문을 ejs엔진을 이용해 편집? 수정하기 위해 set으로 정의
 app.set('view engine', 'ejs')
@@ -55,8 +57,7 @@ app.get('/', function(request, response){
     })
 })
 
-var port = (process.env.PORT || '3000');
 
-app.listen(port, function(){
+app.listen(PORT, function(){
     console.log('App running on port ' + port)
 })

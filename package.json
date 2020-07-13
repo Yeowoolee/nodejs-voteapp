@@ -14,5 +14,11 @@
     "express": "^4.17.1",
     "firebase-admin": "^8.13.0",
     "morgan": "^1.10.0"
+  },
+  "start": "server.js",
+  "engines":{
+    "node": "v12.18.1",
+    "npm": "6.14.5"
   }
+  
 }
