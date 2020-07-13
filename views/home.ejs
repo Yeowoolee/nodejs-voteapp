@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.15.5/firebase-auth.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+    <!-- Bootstrap core CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Material Design Bootstrap -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/js/mdb.min.js"></script>
+        
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCyf4Uong-kp-5i_o9I7YGhLJtGNK4V7AA",
+            authDomain: "withmegg-ee922.firebaseapp.com",
+            databaseURL: "https://withmegg-ee922.firebaseio.com",
+            projectId: "withmegg-ee922",
+            storageBucket: "withmegg-ee922.appspot.com",
+            messagingSenderId: "266117390912",
+            appId: "1:266117390912:web:59c7cfe3fae45ca1f5b5a5",
+            measurementId: "G-0P7EPZH59F"
+        };
+        firebase.initializeApp(firebaseConfig)
+    </script>
+    <title>Vote Language</title>
+    
+</head>
+
+<body>
+
+<!--Navbar -->
+<nav class="mb-1 navbar navbar-expand-lg navbar-dark secondary-color lighten-1">
+  <a class="navbar-brand" href="#">Vote Language</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-555"
+    aria-controls="navbarSupportedContent-555" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarSupportedContent-555">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="/">Home
+          <span class="sr-only">(current)</span>
+        </a>
+      </li>
+     
+    </ul>
+    <ul class="navbar-nav ml-auto nav-flex-icons">
+      <li class="nav-item">
+        <a class="nav-link waves-effect waves-light">1
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+      <li id="myprofile" class="nav-item avatar dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink-55" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <img id="google-pic" src="" class="rounded-circle z-depth-0 img-responsive" width="30" alt="avatar image">
+        </a>
+        <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary"
+          aria-labelledby="navbarDropdownMenuLink-55">
+          <a class="dropdown-item" id="signout" onclick={signOut()}>로그아웃</a>
+          
+        </div>
+        
+      </li>
+      <button id="google-signin" class="btn btn-outline-warning" onclick={signInWithGoogle()}>
+            Login
+        </button>
+    </ul>
+  </div>
+</nav>
+<!--/.Navbar -->
+    <div class="container mt-5">
+        <h1>
+            프로그래밍 언어 추천 페이지
+        </h1>
+        <p>추가할 언어: <input id="addlanguage"></p>
+        <button class='btn btn-primary' onclick={addlanguage()}>
+            등록하기
+        </button>
+        <div class="row row-cols-1 row-cols-md-3 mt-5">
+            <% var keys = Object.keys(languages) %>
+            <% keys.forEach(function(key) {%>
+                <% var allUsers %>
+
+                <% if (languages[key].votes) { %>
+                    <% allUsers = Object.keys(languages[key].votes) %>
+                <% } else { %>
+                <% allUsers = [] %>
+                <% } %>
+            <!-- Card -->
+            <div class="col mb-4">
+                <div class="card">
+                    <!-- Card content -->
+                    <div class="card-body">
+                        <!-- Title -->
+                        <h4 class="card-title"><%= languages[key].name %></h4>
+                        <!-- Text -->
+                        <p class="card-text">Votes: <%= allUsers.length %></p>
+                        <!-- Button -->
+                        <a onclick={upvote("<%= key %>")} class="btn btn-primary">추천</a>
+                        <a onclick={downvote("<%= key %>")} class="btn btn-primary">비추천</a>
+                    </div>
+
+                </div>
+            </div>
+            <% })%>
+        </div>
+
+
+      
+        
+        
+    </div>
+    <script src="js/firebaseAuth.js"></script>
+    <script src="js/firebaseVoting.js"></script>
+</body>
+
+</html>
